@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #00BCD4;
+  --primary-hover: #0097A7;
+  --accent-green: #00E676;
+  --accent-blue: #2962FF;
+  --background: #1A1A1A;
+  --surface: #252525;
+  --surface-highlight: #303030;
+  --border-subtle: #333333;
+  --text-main: #F0F0F0;
+  --text-muted: #B0B0B0;
+
+}
+
+body {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-main);
+  background-color: var(--background);
+}
