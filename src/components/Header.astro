@@ -1,24 +1,49 @@
 ---
+import MobileNavigation from "./MobileNavigation.astro";
 import Navigation from "./Navigation.astro";
 ---
 
-<header class="sticky top-0 z-50 border-b border-(--border-color)">
+<header
+  class="sticky top-0 z-50 bg-(--bg-primary) border-b border-(--border-color)"
+>
   <nav
     aria-label="Navegación principal"
-    class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between"
+    class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between"
   >
     <a href="#hero" class="font-semibold text-lg text-(--text-primary)">
       sebas<span class="opacity-70 text-(--accent-green)">.devsec</span>
     </a>
     <!-- Botón menú (mobile) -->
-    <button class="md:hidden" aria-label="Abrir menú"> ☰ </button>
+    <button
+      id="menu-toggle"
+      class="md:hidden"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-menu-2"
+        ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+          d="M4 6l16 0"></path><path d="M4 12l16 0"></path><path d="M4 18l16 0"
+        ></path></svg
+      ></button
+    >
 
     <Navigation />
 
     <a
-
       aria-label="Descargar CV en formato PDF"
-      class="hidden md:flex gap-2 items-center border-b-2 border rounded-md px-3 py-1 text-sm"
+      class="hidden md:flex gap-2 items-center bg-(--accent-green) text-(--bg-primary) rounded-md px-4 py-1.5 text-sm font-medium hover:bg-(--accent-cyan) transition-colors"
+      href="/cv.pdf"
+      download
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -39,4 +64,39 @@ import Navigation from "./Navigation.astro";
       <span>CV</span>
     </a>
   </nav>
+  <MobileNavigation />
 </header>
+
+<script is:inline>
+  const menuToggle = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  const menuLinks = document.querySelectorAll(".menu-toggle");
+  menuLinks.forEach((link) => {
+    link.addEventListener("click", toggleMenu);
+  });
+
+  menuToggle?.addEventListener("click", toggleMenu);
+
+  function toggleMenu() {
+    const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
+
+    // Toggle aria-expanded
+    menuToggle.setAttribute("aria-expanded", (!isExpanded).toString());
+    menuToggle.setAttribute(
+      "aria-label",
+      isExpanded ? "Cerrar menú" : "Abrir menú"
+    );
+
+    // Toggle animación
+    if (isExpanded) {
+      // Cerrar menú (colapsar)
+      mobileMenu?.classList.remove("grid-rows-[1fr]");
+      mobileMenu?.classList.add("grid-rows-[0fr]");
+    } else {
+      // Abrir menú (expandir)
+      mobileMenu?.classList.remove("grid-rows-[0fr]");
+      mobileMenu?.classList.add("grid-rows-[1fr]");
+    }
+  }
+</script>
