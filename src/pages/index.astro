@@ -8,16 +8,17 @@ import Skills from "../components/Skills.astro";
 import Certifications from "../components/Certifications.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
+
 const title = "Portfolio - Sebas.DevSec";
 const description =
   "Portfolio personal de Sebastián - Desarrollador de Software y Ciberseguridad";
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} >
   <Header />
   <main>
     <Hero />
-    <About />
+    <About/>
     <Projects />
     <Skills />
     <Certifications />

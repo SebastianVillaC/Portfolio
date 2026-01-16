@@ -2,27 +2,35 @@
 import TerminalImg from "../assets/elements/TerminalImg.astro";
 ---
 
-<section id="hero" class="max-w-7xl mx-auto px-6 py-12 md:py-20">
+<section id="hero" class="max-w-7xl mx-auto px-6 py-12 md:py-26 border-b border-(--border-color)">
   <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
     <!-- Contenido texto -->
     <div class="flex-1 space-y-6">
       <header>
         <h1>Software Developer & Cybersecurity Enthusiast</h1>
       </header>
-      
+
       <p>
-        Desarrollo aplicaciones seguras, modernas y escalables,
-        combinando buenas prácticas de desarrollo con principios de ciberseguridad.
+        Desarrollo aplicaciones seguras, modernas y escalables, combinando
+        buenas prácticas de desarrollo con principios de ciberseguridad.
       </p>
-      
-      <nav class="flex gap-4">
-        <a href="#projects">Ver proyectos</a>
-        <a href="#contact">Contactarme</a>
+
+      <nav class="flex gap-8 pt-6">
+        <a
+          href="#projects"
+          class="flex items-center whitespace-nowrap justify-center rounded-lg h-12 px-8 bg-(--accent-green) text-(--bg-primary) font-bold hover:bg-(--accent-blue) transition-colors"
+          >Ver proyectos</a
+        >
+        <a
+          href="#contact"
+          class="flex items-center whitespace-nowrap justify-center rounded-lg h-12 px-8 bg-transparent border border-(--border-color) font-bold text-(--text-primary) hover:bg-(--text-primary) hover:text-(--bg-primary) transition-colors"
+          >Contactarme</a
+        >
       </nav>
     </div>
 
     <!-- Terminal -->
-    <div class="flex-1">
+    <div class="flex-1 max-w-md">
       <TerminalImg />
     </div>
   </div>
