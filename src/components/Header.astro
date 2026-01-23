@@ -3,9 +3,7 @@ import MobileNavigation from "./MobileNavigation.astro";
 import Navigation from "./Navigation.astro";
 ---
 
-<header
-  class="sticky top-0 z-50 bg-(--bg-primary) border-b border-(--border-color)"
->
+<header class="sticky top-0 z-50 bg-(--bg-primary) border-b border-(--border-color)">
   <nav
     aria-label="Navegación principal"
     class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between"
@@ -64,6 +62,13 @@ import Navigation from "./Navigation.astro";
       <span>CV</span>
     </a>
   </nav>
+  <!-- Overlay con blur -->
+  <div
+    id="mobile-overlay"
+    class="hidden md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm -z-10"
+  >
+  </div>
+
   <MobileNavigation />
 </header>
 
@@ -71,6 +76,7 @@ import Navigation from "./Navigation.astro";
   const menuToggle = document.getElementById("menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
 
+  const mobileOverlay = document.getElementById("mobile-overlay");
   const menuLinks = document.querySelectorAll(".menu-toggle");
   menuLinks.forEach((link) => {
     link.addEventListener("click", toggleMenu);
@@ -85,7 +91,7 @@ import Navigation from "./Navigation.astro";
     menuToggle.setAttribute("aria-expanded", (!isExpanded).toString());
     menuToggle.setAttribute(
       "aria-label",
-      isExpanded ? "Cerrar menú" : "Abrir menú"
+      isExpanded ? "Cerrar menú" : "Abrir menú",
     );
 
     // Toggle animación
@@ -93,10 +99,16 @@ import Navigation from "./Navigation.astro";
       // Cerrar menú (colapsar)
       mobileMenu?.classList.remove("grid-rows-[1fr]");
       mobileMenu?.classList.add("grid-rows-[0fr]");
+      mobileOverlay?.classList.add("hidden");
+      document.body.style.overflow = "";
     } else {
       // Abrir menú (expandir)
       mobileMenu?.classList.remove("grid-rows-[0fr]");
       mobileMenu?.classList.add("grid-rows-[1fr]");
+      mobileOverlay?.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
     }
   }
+
+  mobileOverlay?.addEventListener("click", toggleMenu);
 </script>
