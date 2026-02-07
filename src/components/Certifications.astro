@@ -1,3 +1,11 @@
+---
+import { getCollection } from "astro:content";
+import CertificationCard from "./CertificationsCard.astro";
+
+const certifications = await getCollection("certifications");
+
+
+---
 <section id="certifications" class="border-b border-(--border-color)">
   <div class="max-w-7xl mx-auto px-6 py-16 md:py-24">
     <header class="mb-12 text-center">
@@ -7,74 +15,11 @@
       </p>
     </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 place-items-center md:place-items-stretch">
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 place-items-center md:place-items-stretch"
+    >
       <!-- Certifications -->
-      <a
-        href="#certifications"
-        aria-label="Ver certificación de Introducción a la Ciberseguridad"
-        class="block md:w-auto border border-(--border-color) rounded-lg p-6 space-y-1.5 hover:border-(--accent-cyan) transition-colors bg-(--bg-secondary) cursor-pointer"
-      >
-        <h3 class="text-sm font-bold">Introducción a la Ciberseguridad</h3>
-
-        <p class="text-sm text-(--text-secondary)">
-          Cisco Networking Academy • 2024
-        </p>
-      </a>
-     <a
-        href="#certifications"
-        aria-label="Ver certificación de Introducción a la Ciberseguridad"
-        class="block md:w-auto border border-(--border-color) rounded-lg p-6 space-y-1.5 hover:border-(--accent-cyan) transition-colors bg-(--bg-secondary) cursor-pointer"
-      >
-        <h3 class="text-sm font-bold">Introducción a la Ciberseguridad</h3>
-
-        <p class="text-sm text-(--text-secondary)">
-          Cisco Networking Academy • 2024
-        </p>
-      </a>
-       <a
-        href="#certifications"
-        aria-label="Ver certificación de Introducción a la Ciberseguridad"
-        class="block md:w-auto border border-(--border-color) rounded-lg p-6 space-y-1.5 hover:border-(--accent-cyan) transition-colors bg-(--bg-secondary) cursor-pointer"
-      >
-        <h3 class="text-sm font-bold">Introducción a la Ciberseguridad</h3>
-
-        <p class="text-sm text-(--text-secondary)">
-          Cisco Networking Academy • 2024
-        </p>
-      </a>
-       <a
-        href="#certifications"
-        aria-label="Ver certificación de Introducción a la Ciberseguridad"
-        class="block md:w-auto border border-(--border-color) rounded-lg p-6 space-y-1.5 hover:border-(--accent-cyan) transition-colors bg-(--bg-secondary) cursor-pointer"
-      >
-        <h3 class="text-sm font-bold">Introducción a la Ciberseguridad</h3>
-
-        <p class="text-sm text-(--text-secondary)">
-          Cisco Networking Academy • 2024
-        </p>
-      </a>
-       <a
-        href="#certifications"
-        aria-label="Ver certificación de Introducción a la Ciberseguridad"
-        class="block md:w-auto border border-(--border-color) rounded-lg p-6 space-y-1.5 hover:border-(--accent-cyan) transition-colors bg-(--bg-secondary) cursor-pointer"
-      >
-        <h3 class="text-sm font-bold">Introducción a la Ciberseguridad</h3>
-
-        <p class="text-sm text-(--text-secondary)">
-          Cisco Networking Academy • 2024
-        </p>
-      </a>
-       <a
-        href="#certifications"
-        aria-label="Ver certificación de Introducción a la Ciberseguridad"
-        class="block md:w-auto border border-(--border-color) rounded-lg p-6 space-y-1.5 hover:border-(--accent-cyan) transition-colors bg-(--bg-secondary) cursor-pointer"
-      >
-        <h3 class="text-sm font-bold">Introducción a la Ciberseguridad</h3>
-
-        <p class="text-sm text-(--text-secondary)">
-          Cisco Networking Academy • 2024
-        </p>
-      </a>
+      {certifications.map((cert) => <CertificationCard certification={cert} />)}
     </div>
   </div>
 </section>
