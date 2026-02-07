@@ -1,0 +1,21 @@
+---
+import CodeIcon from "../assets/icons/CodeIcon.astro";
+import ShieldIcon from "../assets/icons/ShieldIcon.astro";
+import ToolsIcon from "../assets/icons/ToolsIcon.astro";
+import BookIcon from "../assets/icons/BookIcon.astro";
+import MainIcon from "../assets/icons/MainIcon.astro";
+
+const { name } = Astro.props as { name: keyof typeof icons };
+
+const icons = {
+  code: CodeIcon,
+  shield: ShieldIcon,
+  tools: ToolsIcon,
+  book: BookIcon,
+  main: MainIcon,
+};
+
+const IconComponent = icons[name] || MainIcon;
+---
+
+{IconComponent && <IconComponent />}
