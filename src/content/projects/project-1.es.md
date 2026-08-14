@@ -1,4 +1,5 @@
 ---
+lang: "es"
 title: "Portfolio Personal"
 description: |
     Sitio web personal desarrollado para presentar proyectos, habilidades y certificaciones.

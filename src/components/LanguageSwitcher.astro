@@ -1,0 +1,37 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getLang, useTranslations } from "../i18n/utils";
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+
+const esHref = getRelativeLocaleUrl("es", "/");
+const enHref = getRelativeLocaleUrl("en", "/");
+---
+
+<div class="flex items-center gap-1 text-sm font-medium border border-(--border-color) rounded-md p-1">
+  <a
+    href={esHref}
+    aria-label={t("lang.switchTo.es")}
+    aria-current={lang === "es" ? "page" : undefined}
+    class={`px-2 py-1 rounded transition-colors ${
+      lang === "es"
+        ? "bg-(--accent-green) text-(--bg-primary)"
+        : "text-(--text-secondary) hover:text-(--text-primary)"
+    }`}
+  >
+    ES
+  </a>
+  <a
+    href={enHref}
+    aria-label={t("lang.switchTo.en")}
+    aria-current={lang === "en" ? "page" : undefined}
+    class={`px-2 py-1 rounded transition-colors ${
+      lang === "en"
+        ? "bg-(--accent-green) text-(--bg-primary)"
+        : "text-(--text-secondary) hover:text-(--text-primary)"
+    }`}
+  >
+    EN
+  </a>
+</div>

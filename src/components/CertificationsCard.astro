@@ -1,7 +1,12 @@
 ---
+import { getLang, useTranslations } from "../i18n/utils";
+
 const { data } = Astro.props.certification;
 
-const label = `Ver certificación de ${data.title}`;
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+
+const label = `${t("certifications.viewAriaLabelPrefix")} ${data.title}`;
 ---
 
 <a

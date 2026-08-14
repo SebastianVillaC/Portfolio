@@ -1,4 +1,5 @@
 ---
+lang: "es"
 title: "Ciberseguridad"
 icon: "shield"
 skills:

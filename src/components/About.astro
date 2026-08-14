@@ -1,11 +1,15 @@
 ---
 import {Image} from 'astro:assets';
 import aboutMeImg from '../assets/images/aboutMeImg.png'
+import { getLang, useTranslations } from "../i18n/utils";
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
 ---
 <section id="about" class="border-b border-(--border-color)">
   <div class="max-w-7xl mx-auto px-6 py-12 md:py-26">
     <header class="mb-8 md:hidden">
-      <h2>Sobre mí</h2>
+      <h2>{t("about.heading")}</h2>
     </header>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
       <!-- Imagen (izquierda en desktop) -->
@@ -13,7 +17,7 @@ import aboutMeImg from '../assets/images/aboutMeImg.png'
         <div class="aspect-square rounded-2xl overflow-hidden bg-(--bg-secondary)">
           <Image
             src={aboutMeImg}
-            alt="Imagen Sebastian Villa - Sobre mí"
+            alt={t("about.imageAlt")}
             class="w-full h-full object-cover"
             width={600}
             height={600}
@@ -25,34 +29,26 @@ import aboutMeImg from '../assets/images/aboutMeImg.png'
       <!-- Contenido (derecha en desktop) -->
       <div class="order-2 md:order-2 space-y-8">
         <header class="hidden md:block">
-          <h2>Sobre mí</h2>
+          <h2>{t("about.heading")}</h2>
         </header>
 
         <div class="space-y-4 whitespace-pre-line">
           <p>
-            Soy desarrollador de software con interés en construir aplicaciones
-            modernas y seguras, combinando desarrollo backend y principios de
-            ciberseguridad.
-                    
-            Me enfoco en escribir código limpio, escalable y mantenible, integrando
-            buenas prácticas de seguridad desde el diseño.
-                   
-            Actualmente estoy fortaleciendo mis conocimientos en ciberseguridad,
-            análisis de vulnerabilidades y desarrollo seguro.
+            {t("about.paragraph")}
           </p>
         </div>
 
         <aside class="grid grid-cols-2 gap-4">
           <!-- Años de experiencia -->
           <div class="border border-(--border-color) rounded-lg p-6 text-center space-y-2 transition-transform duration-300 hover:-translate-y-2">
-            <p class="text-4xl font-bold text-(--accent-green)">2+</p>
-            <p class="text-sm text-(--text-secondary)">Años de experiencia</p>
+            <p class="text-4xl font-bold text-(--accent-green)">{t("about.stat1Value")}</p>
+            <p class="text-sm text-(--text-secondary)">{t("about.stat1Label")}</p>
           </div>
 
           <!-- Proyectos completados / Certificaciones / Tecnologías -->
           <div class="border border-(--border-color) rounded-lg p-6 text-center space-y-2 transition-transform duration-300 hover:-translate-y-2">
-            <p class="text-4xl font-bold text-(--accent-cyan)">10+</p>
-            <p class="text-sm text-(--text-secondary)">Proyectos completados</p>
+            <p class="text-4xl font-bold text-(--accent-cyan)">{t("about.stat2Value")}</p>
+            <p class="text-sm text-(--text-secondary)">{t("about.stat2Label")}</p>
           </div>
         </aside>
       </div>

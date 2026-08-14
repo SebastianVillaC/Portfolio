@@ -9,5 +9,12 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   site:'https://github.com/SebastianVillaC',
-  base:'/Portfolio/'
+  base:'/Portfolio/',
+  i18n: {
+    defaultLocale: 'es',
+    locales: ['es', 'en'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 });

@@ -7,6 +7,7 @@ const projects = defineCollection({
     base: "./src/content/projects",
   }),
   schema: z.object({
+    lang: z.enum(["es", "en"]),
     title: z.string(),
     description: z.string(),
     tech: z.array(z.string()),
@@ -21,6 +22,7 @@ const certifications = defineCollection({
     base: "./src/content/certifications",
   }),
   schema: z.object({
+    lang: z.enum(["es", "en"]),
     title: z.string(),
     issuer: z.string(),
     year: z.number(),
@@ -34,6 +36,7 @@ const stack = defineCollection({
     base: "./src/content/stack",
   }),
   schema: z.object({
+    lang: z.enum(["es", "en"]),
     title: z.string(),
     icon: z.string(), // nombre del icono
     skills: z.array(z.string()),

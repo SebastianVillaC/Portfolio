@@ -1,11 +1,14 @@
 ---
+import { getLang, useTranslations } from "../i18n/utils";
 
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
 ---
 
 <ul class="hidden md:flex gap-4 text-sm">
-  <li><a href="#about">Sobre mí</a></li>
-  <li><a href="#projects">Proyectos</a></li>
-  <li><a href="#stack">Habilidades</a></li>
-  <li><a href="#certifications">Certificaciones</a></li>
-  <li><a href="#contact">Contacto</a></li>
+  <li><a href="#about">{t("nav.about")}</a></li>
+  <li><a href="#projects">{t("nav.projects")}</a></li>
+  <li><a href="#stack">{t("nav.stack")}</a></li>
+  <li><a href="#certifications">{t("nav.certifications")}</a></li>
+  <li><a href="#contact">{t("nav.contact")}</a></li>
 </ul>

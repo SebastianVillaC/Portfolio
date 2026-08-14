@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Hero from "../../components/Hero.astro";
+import About from "../../components/About.astro";
+import Projects from "../../components/Projects.astro";
+import Certifications from "../../components/Certifications.astro";
+import Contact from "../../components/Contact.astro";
+import Footer from "../../components/Footer.astro";
+import Stack from "../../components/Stack.astro";
+
+const title = "Portfolio - Sebas.DevSec";
+const description =
+  "Sebastián's personal portfolio - Software Developer & Cybersecurity";
+---
+
+<BaseLayout title={title} description={description} >
+  <Header />
+  <main>
+    <Hero />
+    <About/>
+    <Projects />
+    <Stack />
+    <Certifications />
+    <Contact />
+  </main>
+  <Footer />
+</BaseLayout>

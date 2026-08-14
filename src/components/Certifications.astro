@@ -1,17 +1,22 @@
 ---
 import { getCollection } from "astro:content";
 import CertificationCard from "./CertificationsCard.astro";
+import { getLang, useTranslations } from "../i18n/utils";
 
-const certifications = await getCollection("certifications");
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
 
-
+const certifications = await getCollection(
+  "certifications",
+  (entry) => entry.data.lang === lang,
+);
 ---
 <section id="certifications" class="border-b border-(--border-color)">
   <div class="max-w-7xl mx-auto px-6 py-16 md:py-24">
     <header class="mb-12 text-center">
-      <h2>Certificaciones</h2>
+      <h2>{t("certifications.heading")}</h2>
       <p class="mt-4 text-(--text-secondary)">
-        Formación continua en desarrollo y seguridad
+        {t("certifications.description")}
       </p>
     </header>
 

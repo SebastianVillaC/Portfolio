@@ -1,11 +1,17 @@
 ---
 import MobileNavigation from "./MobileNavigation.astro";
 import Navigation from "./Navigation.astro";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import { getLang, useTranslations } from "../i18n/utils";
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const cvHref = `/Portfolio/cv-${lang}.pdf`;
 ---
 
 <header class="sticky top-0 z-50 bg-(--bg-primary) border-b border-(--border-color)">
   <nav
-    aria-label="Navegación principal"
+    aria-label={t("nav.ariaLabel")}
     class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between"
   >
     <a href="#" class="font-semibold text-lg text-(--text-primary)">
@@ -15,8 +21,10 @@ import Navigation from "./Navigation.astro";
     <button
       id="menu-toggle"
       class="md:hidden"
-      aria-label="Abrir menú"
+      aria-label={t("nav.openMenu")}
       aria-expanded="false"
+      data-open-label={t("nav.openMenu")}
+      data-close-label={t("nav.closeMenu")}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -37,13 +45,16 @@ import Navigation from "./Navigation.astro";
 
     <Navigation />
 
-    <a
-      aria-label="Abrir CV en formato PDF"
-      class="hidden md:flex gap-2 items-center bg-(--accent-green) text-(--bg-primary) rounded-md px-4 py-1.5 text-sm font-medium hover:bg-(--accent-cyan) transition-colors"
-      href="/Portfolio/cv.pdf"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
+    <div class="hidden md:flex items-center gap-3">
+      <LanguageSwitcher />
+
+      <a
+        aria-label={t("cv.ariaLabel")}
+        class="flex gap-2 items-center bg-(--accent-green) text-(--bg-primary) rounded-md px-4 py-1.5 text-sm font-medium hover:bg-(--accent-cyan) transition-colors"
+        href={cvHref}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -60,8 +71,9 @@ import Navigation from "./Navigation.astro";
           d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
         ></path>
       </svg>
-      <span>CV</span>
-    </a>
+      <span>{t("cv.label")}</span>
+      </a>
+    </div>
   </nav>
   <!-- Overlay con blur -->
   <div
@@ -92,7 +104,9 @@ import Navigation from "./Navigation.astro";
     menuToggle.setAttribute("aria-expanded", (!isExpanded).toString());
     menuToggle.setAttribute(
       "aria-label",
-      isExpanded ? "Cerrar menú" : "Abrir menú",
+      isExpanded
+        ? menuToggle.dataset.openLabel
+        : menuToggle.dataset.closeLabel,
     );
 
     // Toggle animación

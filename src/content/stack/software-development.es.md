@@ -1,4 +1,5 @@
 ---
+lang: "es"
 title: "Desarrollo de Software"
 icon: "code"
 skills:

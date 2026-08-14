@@ -1,12 +1,18 @@
+---
+import { getLang, useTranslations } from "../i18n/utils";
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+---
 <footer>
   <div class="max-w-7xl mx-auto px-6 py-8">
     <div class="flex flex-col items-center gap-2 text-center">
       <p class="text-sm text-(--text-secondary)">
-        © <time id="current-year"></time> sebas<span class="text-(--accent-green)">.devsec</span> - Todos los derechos reservados
+        © <time id="current-year"></time> sebas<span class="text-(--accent-green)">.devsec</span> - {t("footer.rights")}
       </p>
-      
+
       <p class="text-xs text-(--text-secondary)">
-        Desarrollado con <span class="text-(--accent-cyan)">Astro</span> y <span class="text-(--accent-cyan)">Tailwind CSS</span>
+        {t("footer.builtWith")} <span class="text-(--accent-cyan)">Astro</span> {t("footer.and")} <span class="text-(--accent-cyan)">Tailwind CSS</span>
       </p>
     </div>
   </div>
