@@ -13,7 +13,8 @@ const certifications = await getCollection(
 ---
 <section id="certifications" class="border-b border-(--border-color)">
   <div class="max-w-7xl mx-auto px-6 py-16 md:py-24">
-    <header class="mb-12 text-center">
+    <header class="mb-12 text-center" data-reveal>
+      <p class="font-mono text-xs text-(--accent-cyan) mb-2 tracking-wide">~/certifications</p>
       <h2>{t("certifications.heading")}</h2>
       <p class="mt-4 text-(--text-secondary)">
         {t("certifications.description")}
@@ -23,8 +24,9 @@ const certifications = await getCollection(
     <div
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 place-items-center md:place-items-stretch"
     >
-      <!-- Certifications -->
-      {certifications.map((cert) => <CertificationCard certification={cert} />)}
+      {certifications.map((cert, index) => (
+        <CertificationCard certification={cert} delay={index * 100} />
+      ))}
     </div>
   </div>
 </section>

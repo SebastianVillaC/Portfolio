@@ -23,6 +23,9 @@ export const ui = {
     "lang.switchTo.es": "Cambiar a español",
     "lang.switchTo.en": "Switch to English",
 
+    "theme.switchToLight": "Cambiar a tema claro",
+    "theme.switchToDark": "Cambiar a tema oscuro",
+
     "hero.title": "Software Developer & Cybersecurity Enthusiast",
     "hero.description":
       "Desarrollo aplicaciones seguras, modernas y escalables, combinando buenas prácticas de desarrollo con principios de ciberseguridad.",
@@ -83,6 +86,9 @@ export const ui = {
 
     "lang.switchTo.es": "Cambiar a español",
     "lang.switchTo.en": "Switch to English",
+
+    "theme.switchToLight": "Switch to light theme",
+    "theme.switchToDark": "Switch to dark theme",
 
     "hero.title": "Software Developer & Cybersecurity Enthusiast",
     "hero.description":

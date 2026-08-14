@@ -1,0 +1,90 @@
+---
+import { getLang, useTranslations } from "../i18n/utils";
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+---
+
+<button
+  data-theme-toggle
+  type="button"
+  aria-label={t("theme.switchToLight")}
+  data-label-light={t("theme.switchToLight")}
+  data-label-dark={t("theme.switchToDark")}
+  class="flex items-center justify-center w-11 h-11 rounded-md border border-(--border-color) text-(--text-secondary) hover:text-(--text-primary) hover:border-(--accent-cyan) transition-colors"
+>
+  <svg
+    class="w-4 h-4 theme-icon-moon"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"></path>
+  </svg>
+  <svg
+    class="w-4 h-4 theme-icon-sun"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 3v1M12 20v1M4.2 4.2l.7.7M19.1 19.1l.7.7M3 12h1M20 12h1M4.2 19.8l.7-.7M19.1 4.9l.7-.7"
+    ></path>
+  </svg>
+</button>
+
+<style>
+  .theme-icon-sun {
+    display: none;
+  }
+  :root[data-theme="light"] .theme-icon-moon {
+    display: none;
+  }
+  :root[data-theme="light"] .theme-icon-sun {
+    display: block;
+  }
+</style>
+
+<script>
+  function toggleTheme() {
+    const isLight = document.documentElement.dataset.theme === "light";
+    const next = isLight ? "dark" : "light";
+
+    if (next === "light") {
+      document.documentElement.dataset.theme = "light";
+    } else {
+      delete document.documentElement.dataset.theme;
+    }
+
+    localStorage.setItem("theme", next);
+
+    document
+      .querySelectorAll<HTMLButtonElement>("[data-theme-toggle]")
+      .forEach((btn) => {
+        btn.setAttribute(
+          "aria-label",
+          next === "light"
+            ? (btn.dataset.labelDark ?? "")
+            : (btn.dataset.labelLight ?? ""),
+        );
+      });
+  }
+
+  function initThemeToggle() {
+    document
+      .querySelectorAll<HTMLButtonElement>("[data-theme-toggle]")
+      .forEach((btn) => {
+        btn.addEventListener("click", toggleTheme);
+      });
+  }
+
+  document.addEventListener("astro:page-load", initThemeToggle);
+</script>

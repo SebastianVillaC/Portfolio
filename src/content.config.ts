@@ -6,14 +6,16 @@ const projects = defineCollection({
     pattern: "**/*.{md,mdx}",
     base: "./src/content/projects",
   }),
-  schema: z.object({
-    lang: z.enum(["es", "en"]),
-    title: z.string(),
-    description: z.string(),
-    tech: z.array(z.string()),
-    github: z.string().url().nullable(),
-    demo: z.string().url().optional().nullable(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      lang: z.enum(["es", "en"]),
+      title: z.string(),
+      description: z.string(),
+      tech: z.array(z.string()),
+      github: z.string().url().nullable(),
+      demo: z.string().url().optional().nullable(),
+      image: image().optional(),
+    }),
 });
 
 const certifications = defineCollection({

@@ -2,6 +2,7 @@
 import MobileNavigation from "./MobileNavigation.astro";
 import Navigation from "./Navigation.astro";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 import { getLang, useTranslations } from "../i18n/utils";
 
 const lang = getLang(Astro.currentLocale);
@@ -46,11 +47,12 @@ const cvHref = `/Portfolio/cv-${lang}.pdf`;
     <Navigation />
 
     <div class="hidden md:flex items-center gap-3">
+      <ThemeToggle />
       <LanguageSwitcher />
 
       <a
         aria-label={t("cv.ariaLabel")}
-        class="flex gap-2 items-center bg-(--accent-green) text-(--bg-primary) rounded-md px-4 py-1.5 text-sm font-medium hover:bg-(--accent-cyan) transition-colors"
+        class="flex gap-2 items-center bg-(--accent-green) text-(--bg-primary) rounded-md px-4 py-1.5 text-sm font-medium hover:brightness-110 transition-[filter]"
         href={cvHref}
         target="_blank"
         rel="noopener noreferrer"
@@ -78,7 +80,7 @@ const cvHref = `/Portfolio/cv-${lang}.pdf`;
   <!-- Overlay con blur -->
   <div
     id="mobile-overlay"
-    class="hidden md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm -z-10"
+    class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm -z-10"
   >
   </div>
 

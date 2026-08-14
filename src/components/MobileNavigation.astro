@@ -1,5 +1,6 @@
 ---
 import LanguageSwitcher from "./LanguageSwitcher.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 import { getLang, useTranslations } from "../i18n/utils";
 
 const lang = getLang(Astro.currentLocale);
@@ -26,7 +27,7 @@ const cvHref = `/Portfolio/cv-${lang}.pdf`;
           target="_blank"
           rel="noopener noreferrer"
           aria-label={t("cv.labelMobile")}
-          class="flex gap-2 items-center justify-center w-fit bg-(--accent-green) text-(--bg-primary) rounded-md px-4 py-2 text-sm font-medium hover:bg-(--accent-cyan) transition-colors"
+          class="flex gap-2 items-center justify-center w-fit bg-(--accent-green) text-(--bg-primary) rounded-md px-4 py-2 text-sm font-medium hover:brightness-110 transition-[filter]"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +46,10 @@ const cvHref = `/Portfolio/cv-${lang}.pdf`;
           <span>{t("cv.labelMobile")}</span>
         </a>
 
-        <LanguageSwitcher />
+        <div class="flex items-center gap-3">
+          <ThemeToggle />
+          <LanguageSwitcher />
+        </div>
       </ul>
     </div>
   </div>

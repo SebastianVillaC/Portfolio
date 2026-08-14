@@ -10,9 +10,9 @@ const t = useTranslations(lang);
   <div class="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-26">
     <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
       <!-- Contenido texto -->
-      <div class="flex-1 space-y-6 w-full">
+      <div class="flex-1 space-y-6 w-full" data-reveal>
         <header>
-          <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+          <h1 class="text-[clamp(2rem,1.4rem+3vw,3.5rem)] font-bold leading-tight">
             {t("hero.title")}
           </h1>
         </header>
@@ -24,13 +24,13 @@ const t = useTranslations(lang);
         <nav class="flex flex-col sm:flex-row gap-4 pt-6">
           <a
             href="#projects"
-            class="flex items-center whitespace-nowrap justify-center rounded-lg h-12 px-8 bg-(--accent-green) text-(--bg-primary) font-bold hover:bg-(--accent-cyan) transition-colors"
+            class="flex items-center whitespace-nowrap justify-center rounded-lg h-12 px-8 bg-(--accent-green) text-(--bg-primary) font-bold hover:brightness-110 transition-[filter]"
           >
             {t("hero.ctaProjects")}
           </a>
           <a
             href="#contact"
-            class="flex items-center whitespace-nowrap justify-center rounded-lg h-12 px-8 bg-transparent border border-(--border-color) font-bold text-(--text-primary) hover:bg-(--text-primary) hover:text-(--bg-primary) transition-colors"
+            class="flex items-center whitespace-nowrap justify-center rounded-lg h-12 px-8 border border-(--accent-cyan) font-bold text-(--accent-cyan) hover:bg-(--accent-cyan) hover:text-(--bg-primary) transition-colors"
           >
             {t("hero.ctaContact")}
           </a>

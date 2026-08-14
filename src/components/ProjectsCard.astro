@@ -1,7 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import { getLang, useTranslations } from "../i18n/utils";
 
 const { data } = Astro.props.project;
+const { delay = 0 } = Astro.props;
 
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
@@ -9,7 +11,23 @@ const t = useTranslations(lang);
 
 <article
   class="border border-(--border-color) rounded-lg p-6 space-y-4 hover:border-(--accent-cyan) transition-colors"
+  data-reveal
+  style={`transition-delay: ${delay}ms`}
 >
+  {
+    data.image && (
+      <div class="-mx-6 -mt-6 mb-2 overflow-hidden rounded-t-lg">
+        <Image
+          src={data.image}
+          alt={data.title}
+          class="w-full h-40 object-cover"
+          width={480}
+          height={240}
+        />
+      </div>
+    )
+  }
+
   <h3 class="text-xl font-bold">{data.title}</h3>
 
   <p class="text-(--text-secondary) text-sm whitespace-pre-line">
@@ -58,7 +76,7 @@ const t = useTranslations(lang);
           target="_blank"
           rel="noopener noreferrer"
           aria-label={t("projects.demoAriaLabel")}
-          class="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-(--accent-green) text-(--bg-primary) rounded-lg text-sm font-medium hover:bg-(--accent-cyan) transition-colors"
+          class="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-(--accent-green) text-(--bg-primary) rounded-lg text-sm font-medium hover:brightness-110 transition-[filter]"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
