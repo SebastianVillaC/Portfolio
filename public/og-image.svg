@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0a" />
+      <stop offset="50%" stop-color="#121214" />
+      <stop offset="100%" stop-color="#070a0f" />
+    </linearGradient>
+    <linearGradient id="cyan-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00d1ff" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#00d1ff" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="green-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e676" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#00e676" stop-opacity="0" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="30" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)" />
+
+  <!-- Ambient Glows -->
+  <circle cx="150" cy="150" r="300" fill="url(#cyan-glow)" />
+  <circle cx="1050" cy="480" r="350" fill="url(#green-glow)" />
+
+  <!-- Grid overlay -->
+  <g opacity="0.07" stroke="#00d1ff" stroke-width="1">
+    <line x1="0" y1="90" x2="1200" y2="90" />
+    <line x1="0" y1="180" x2="1200" y2="180" />
+    <line x1="0" y1="270" x2="1200" y2="270" />
+    <line x1="0" y1="360" x2="1200" y2="360" />
+    <line x1="0" y1="450" x2="1200" y2="450" />
+    <line x1="0" y1="540" x2="1200" y2="540" />
+    <line x1="120" y1="0" x2="120" y2="630" />
+    <line x1="240" y1="0" x2="240" y2="630" />
+    <line x1="360" y1="0" x2="360" y2="630" />
+    <line x1="480" y1="0" x2="480" y2="630" />
+    <line x1="600" y1="0" x2="600" y2="630" />
+    <line x1="720" y1="0" x2="720" y2="630" />
+    <line x1="840" y1="0" x2="840" y2="630" />
+    <line x1="960" y1="0" x2="960" y2="630" />
+    <line x1="1080" y1="0" x2="1080" y2="630" />
+  </g>
+
+  <!-- Terminal Window Mockup -->
+  <g transform="translate(100, 80)">
+    <!-- Window box -->
+    <rect width="1000" height="470" rx="16" fill="#161618" stroke="#2d2d30" stroke-width="1.5" />
+    
+    <!-- Titlebar -->
+    <rect width="1000" height="50" rx="16" fill="#0e0e10" />
+    <rect y="34" width="1000" height="16" fill="#0e0e10" />
+    <line x1="0" y1="50" x2="1000" y2="50" stroke="#2d2d30" stroke-width="1" />
+
+    <!-- Window controls -->
+    <circle cx="35" cy="25" r="7" fill="#ff5f56" />
+    <circle cx="60" cy="25" r="7" fill="#ffbd2e" />
+    <circle cx="85" cy="25" r="7" fill="#27c93f" />
+
+    <!-- Prompt title -->
+    <text x="500" y="31" fill="#71717a" font-family="monospace" font-size="14" text-anchor="middle">sebas@mainframe: ~/portfolio</text>
+
+    <!-- Content -->
+    <text x="60" y="110" fill="#00d1ff" font-family="monospace" font-size="20" font-weight="bold">➜ ~/portfolio</text>
+    <text x="230" y="110" fill="#a0a0a0" font-family="monospace" font-size="20">./whoami.sh</text>
+
+    <text x="60" y="180" fill="#f0f0f0" font-family="system-ui, sans-serif" font-size="44" font-weight="800">
+      Sebastián Villa
+    </text>
+    <text x="440" y="180" fill="#00e676" font-family="monospace" font-size="34" font-weight="600">
+      .devsec
+    </text>
+
+    <text x="60" y="240" fill="#00d1ff" font-family="monospace" font-size="24" font-weight="600">
+      Software Developer &amp; Cybersecurity Enthusiast
+    </text>
+
+    <text x="60" y="295" fill="#a0a0a0" font-family="system-ui, sans-serif" font-size="18" width="800">
+      Desarrollo de aplicaciones seguras, modernas y escalables con buenas prácticas de DevSecOps.
+    </text>
+
+    <!-- Tags -->
+    <g transform="translate(60, 350)">
+      <!-- Tag 1 -->
+      <rect x="0" y="0" width="130" height="38" rx="8" fill="#1f2428" stroke="#00d1ff" stroke-opacity="0.4" />
+      <text x="65" y="24" fill="#00d1ff" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">TypeScript</text>
+
+      <!-- Tag 2 -->
+      <rect x="145" y="0" width="100" height="38" rx="8" fill="#1f2428" stroke="#00e676" stroke-opacity="0.4" />
+      <text x="195" y="24" fill="#00e676" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">Astro</text>
+
+      <!-- Tag 3 -->
+      <rect x="260" y="0" width="160" height="38" rx="8" fill="#1f2428" stroke="#00d1ff" stroke-opacity="0.4" />
+      <text x="340" y="24" fill="#00d1ff" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">Cybersecurity</text>
+
+      <!-- Tag 4 -->
+      <rect x="435" y="0" width="130" height="38" rx="8" fill="#1f2428" stroke="#00e676" stroke-opacity="0.4" />
+      <text x="500" y="24" fill="#00e676" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">Backend</text>
+
+      <!-- Tag 5 -->
+      <rect x="580" y="0" width="140" height="38" rx="8" fill="#1f2428" stroke="#00d1ff" stroke-opacity="0.4" />
+      <text x="650" y="24" fill="#00d1ff" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">OWASP / Sec</text>
+    </g>
+
+    <!-- Status indicator -->
+    <g transform="translate(60, 420)">
+      <circle cx="10" cy="5" r="5" fill="#00e676" />
+      <text x="25" y="9" fill="#00e676" font-family="monospace" font-size="13" font-weight="bold">STATUS: AVAILABLE FOR WORK</text>
+      <text x="680" y="9" fill="#71717a" font-family="monospace" font-size="13">https://sebastianvillac.github.io/Portfolio/</text>
+    </g>
+  </g>
+</svg>

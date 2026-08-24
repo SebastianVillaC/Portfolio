@@ -3,9 +3,9 @@ lang: "es"
 title: "Desarrollo de Software"
 icon: "code"
 skills:
-  - JavaScript
-  - TypeScript
-  - Desarrollo Backend
-  - APIs REST
-  - Arquitectura básica de aplicaciones
+  - TypeScript / JavaScript
+  - Node.js & NestJS
+  - React & Tailwind CSS
+  - PostgreSQL & Prisma ORM
+  - APIs RESTful & Backend
 ---

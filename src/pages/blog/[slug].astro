@@ -1,0 +1,129 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { getLang, useTranslations } from "../../i18n/utils";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", (entry) => entry.data.lang === "es");
+  return posts.map((post) => {
+    const slug = post.id.replace(/[-.]?(es|en)(\.md)?$/i, "");
+    return {
+      params: { slug },
+      props: { post },
+    };
+  });
+}
+
+const { post } = Astro.props;
+const { data } = post;
+const { Content } = await render(post);
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+
+const title = `${data.title} | Blog Sebas.DevSec`;
+const description = data.description;
+---
+
+<BaseLayout title={title} description={description} type="article">
+  <Header />
+
+  <main id="main-content" class="px-6 py-12 md:py-20 max-w-4xl mx-auto flex-1">
+    <!-- Back to blog -->
+    <div class="mb-8" data-reveal>
+      <a
+        href="/Portfolio/blog"
+        class="inline-flex items-center gap-2 text-xs font-mono text-(--text-secondary) hover:text-(--accent-cyan) transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span>~/blog/writeups</span>
+      </a>
+    </div>
+
+    <!-- Article Header -->
+    <header class="space-y-6 pb-8 border-b border-(--border-color)" data-reveal>
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="badge-devsec text-xs font-mono">
+          {data.category}
+        </span>
+        <span class="text-xs font-mono text-(--text-muted)">
+          ⏱️ {data.readingTime}
+        </span>
+        <span class="text-xs font-mono text-(--text-muted)">
+          📅 {data.publishDate}
+        </span>
+      </div>
+
+      <h1 class="text-[clamp(1.8rem,1.4rem+2.5vw,3rem)] font-extrabold text-(--text-primary) tracking-tight leading-tight">
+        {data.title}
+      </h1>
+
+      <p class="text-base md:text-lg text-(--text-secondary) leading-relaxed">
+        {data.description}
+      </p>
+
+      <!-- Author and Tags -->
+      <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+        <div class="flex items-center gap-2 text-xs font-mono text-(--text-muted)">
+          <span class="w-2 h-2 rounded-full bg-(--accent-green)"></span>
+          <span>{t("blog.author")}: {data.author}</span>
+        </div>
+
+        <div class="flex flex-wrap gap-1.5">
+          {data.tags.map((tag: string) => (
+            <span class="px-2.5 py-1 rounded bg-(--bg-secondary) border border-(--border-color) text-xs font-mono text-(--text-secondary)">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </header>
+
+    <!-- Markdown Content Body -->
+    <article class="prose prose-invert max-w-none space-y-6 py-8 text-(--text-secondary) leading-relaxed" data-reveal>
+      <Content />
+    </article>
+
+    <!-- Author Box -->
+    <div class="p-6 rounded-xl border border-(--border-color) bg-(--bg-secondary)/60 my-10 flex flex-col sm:flex-row items-center gap-5" data-reveal>
+      <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-(--accent-cyan) to-(--accent-green) flex items-center justify-center text-(--bg-primary) font-bold text-xl font-mono shrink-0">
+        SV
+      </div>
+      <div class="space-y-1 text-center sm:text-left">
+        <h2 class="text-sm font-bold text-(--text-primary)">Sebastián Villa</h2>
+        <p class="text-xs text-(--text-secondary) leading-relaxed">
+          Desarrollador de software enfocado en seguridad backend, arquitectura limpia y análisis de vulnerabilidades.
+        </p>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="pt-8 border-t border-(--border-color) flex items-center justify-between" data-reveal>
+      <a
+        href="/Portfolio/blog"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-(--border-color) bg-(--bg-secondary) text-xs font-mono text-(--text-primary) hover:border-(--accent-cyan) transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span>{t("blog.backToBlog")}</span>
+      </a>
+
+      <a
+        href="/Portfolio/#contact"
+        class="inline-flex items-center gap-2 text-xs font-mono text-(--accent-cyan) hover:underline"
+      >
+        <span>Comentar o consultar</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

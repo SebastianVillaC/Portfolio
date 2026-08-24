@@ -1,0 +1,47 @@
+---
+import { getLang } from "../i18n/utils";
+
+const lang = getLang(Astro.currentLocale);
+---
+
+<button
+  id="back-to-top"
+  type="button"
+  aria-label={lang === "es" ? "Volver arriba" : "Back to top"}
+  class="fixed bottom-6 right-6 z-40 p-3 rounded-xl border border-(--border-color) bg-(--bg-secondary)/80 backdrop-blur-md text-(--text-secondary) hover:text-(--accent-cyan) hover:border-(--accent-cyan) shadow-lg opacity-0 pointer-events-none translate-y-4 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-(--accent-cyan)"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="w-5 h-5"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    stroke-width="2.5"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+  </svg>
+</button>
+
+<script>
+  function initBackToTop() {
+    const btn = document.getElementById("back-to-top");
+    if (!btn) return;
+
+    function handleScroll() {
+      if (window.scrollY > 400) {
+        btn?.classList.remove("opacity-0", "pointer-events-none", "translate-y-4");
+        btn?.classList.add("opacity-100", "translate-y-0");
+      } else {
+        btn?.classList.add("opacity-0", "pointer-events-none", "translate-y-4");
+        btn?.classList.remove("opacity-100", "translate-y-0");
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    btn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  document.addEventListener("astro:page-load", initBackToTop);
+</script>

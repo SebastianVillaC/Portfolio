@@ -1,0 +1,180 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import ProjectsCard from "../../../components/ProjectsCard.astro";
+import { getCollection } from "astro:content";
+import { getLang, useTranslations } from "../../../i18n/utils";
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+
+const allProjects = await getCollection("projects", (entry) => entry.data.lang === "en");
+
+const title = "Projects | Sebas.DevSec";
+const description = "Complete catalog of secure software engineering, tools, and backend architectures.";
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+
+  <main id="main-content" class="px-6 py-12 md:py-20 max-w-7xl mx-auto flex-1">
+    <!-- Breadcrumb / Back -->
+    <div class="mb-8" data-reveal>
+      <a
+        href="/Portfolio/en/"
+        class="inline-flex items-center gap-2 text-xs font-mono text-(--text-secondary) hover:text-(--accent-cyan) transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span>~/home</span>
+      </a>
+    </div>
+
+    <!-- Header -->
+    <header class="mb-10 text-center max-w-2xl mx-auto" data-reveal>
+      <p class="font-mono text-xs text-(--accent-cyan) mb-2 tracking-wide">~/projects/catalog</p>
+      <h1>{t("projects.allTitle")}</h1>
+      <p class="text-(--text-secondary) text-sm sm:text-base">
+        {t("projects.allSubtitle")}
+      </p>
+    </header>
+
+    <!-- Filters & Search Toolbar -->
+    <div class="mb-10 space-y-4 max-w-4xl mx-auto" data-reveal>
+      <!-- Search Input -->
+      <div class="relative">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-(--text-muted)"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input
+          id="project-search"
+          type="text"
+          placeholder={t("projects.searchPlaceholder")}
+          class="w-full pl-12 pr-4 py-3 rounded-xl bg-(--bg-secondary) border border-(--border-color) focus:border-(--accent-cyan) focus:outline-none text-sm text-(--text-primary) placeholder:text-(--text-muted) transition-colors font-mono"
+        />
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="flex flex-wrap items-center justify-center gap-2 pt-2" id="category-filters">
+        <button
+          type="button"
+          data-category="all"
+          class="filter-btn active px-4 py-1.5 rounded-lg text-xs font-mono font-semibold bg-(--accent-cyan) text-(--bg-primary) transition-all"
+        >
+          {t("projects.filterAll")}
+        </button>
+        <button
+          type="button"
+          data-category="cybersecurity"
+          class="filter-btn px-4 py-1.5 rounded-lg text-xs font-mono font-semibold bg-(--bg-secondary) border border-(--border-color) text-(--text-secondary) hover:text-(--accent-cyan) hover:border-(--accent-cyan) transition-all"
+        >
+          {t("projects.filterCyber")}
+        </button>
+        <button
+          type="button"
+          data-category="backend"
+          class="filter-btn px-4 py-1.5 rounded-lg text-xs font-mono font-semibold bg-(--bg-secondary) border border-(--border-color) text-(--text-secondary) hover:text-(--accent-cyan) hover:border-(--accent-cyan) transition-all"
+        >
+          {t("projects.filterBackend")}
+        </button>
+        <button
+          type="button"
+          data-category="fullstack"
+          class="filter-btn px-4 py-1.5 rounded-lg text-xs font-mono font-semibold bg-(--bg-secondary) border border-(--border-color) text-(--text-secondary) hover:text-(--accent-cyan) hover:border-(--accent-cyan) transition-all"
+        >
+          {t("projects.filterFullstack")}
+        </button>
+      </div>
+    </div>
+
+    <!-- Projects Grid -->
+    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        allProjects.map((pro, index) => (
+          <div class="project-item-wrapper" data-category={pro.data.category} data-title={pro.data.title.toLowerCase()} data-tech={pro.data.tech.join(" ").toLowerCase()} data-desc={pro.data.description.toLowerCase()}>
+            <ProjectsCard project={pro} delay={index * 80} />
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- No results message -->
+    <div id="no-projects-msg" class="hidden text-center py-16 border border-(--border-color) rounded-xl bg-(--bg-secondary)/40 mt-8">
+      <p class="font-mono text-sm text-(--text-secondary)">{t("projects.noResults")}</p>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  function initProjectFilters() {
+    const searchInput = document.getElementById("project-search") as HTMLInputElement | null;
+    const filterButtons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+    const items = document.querySelectorAll<HTMLElement>(".project-item-wrapper");
+    const noMsg = document.getElementById("no-projects-msg");
+
+    let currentCategory = "all";
+    let searchQuery = "";
+
+    function filterItems() {
+      let visibleCount = 0;
+
+      items.forEach((item) => {
+        const itemCat = item.dataset.category || "";
+        const title = item.dataset.title || "";
+        const tech = item.dataset.tech || "";
+        const desc = item.dataset.desc || "";
+
+        const matchesCat = currentCategory === "all" || itemCat === currentCategory;
+        const matchesSearch = !searchQuery || title.includes(searchQuery) || tech.includes(searchQuery) || desc.includes(searchQuery);
+
+        if (matchesCat && matchesSearch) {
+          item.classList.remove("hidden");
+          visibleCount++;
+        } else {
+          item.classList.add("hidden");
+        }
+      });
+
+      if (noMsg) {
+        if (visibleCount === 0) {
+          noMsg.classList.remove("hidden");
+        } else {
+          noMsg.classList.add("hidden");
+        }
+      }
+    }
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filterButtons.forEach((b) => {
+          b.classList.remove("bg-(--accent-cyan)", "text-(--bg-primary)", "active");
+          b.classList.add("bg-(--bg-secondary)", "border", "border-(--border-color)", "text-(--text-secondary)");
+        });
+
+        btn.classList.add("bg-(--accent-cyan)", "text-(--bg-primary)", "active");
+        btn.classList.remove("bg-(--bg-secondary)", "border", "border-(--border-color)", "text-(--text-secondary)");
+
+        currentCategory = btn.dataset.category || "all";
+        filterItems();
+      });
+    });
+
+    searchInput?.addEventListener("input", (e) => {
+      searchQuery = (e.target as HTMLInputElement).value.toLowerCase().trim();
+      filterItems();
+    });
+  }
+
+  document.addEventListener("astro:page-load", initProjectFilters);
+</script>

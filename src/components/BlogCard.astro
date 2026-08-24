@@ -1,0 +1,65 @@
+---
+import { getLang, useTranslations } from "../i18n/utils";
+
+const { post, delay = 0 } = Astro.props;
+const { data, id } = post;
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+
+const slug = id.replace(/[-.]?(es|en)(\.md)?$/i, "");
+const blogHref = lang === "en" ? `/Portfolio/en/blog/${slug}` : `/Portfolio/blog/${slug}`;
+---
+
+<article
+  class="flex flex-col justify-between border border-(--border-color) bg-(--bg-secondary)/60 backdrop-blur-sm rounded-xl p-6 space-y-4 card-glow transition-all group"
+  data-reveal
+  style={`transition-delay: ${delay}ms`}
+>
+  <div class="space-y-3">
+    <!-- Meta row -->
+    <div class="flex items-center justify-between gap-2 text-xs font-mono">
+      <span class="text-(--accent-cyan) bg-(--accent-cyan)/10 px-2.5 py-0.5 rounded-md border border-(--accent-cyan)/20 font-medium">
+        {data.category}
+      </span>
+      <span class="text-(--text-muted)">
+        {data.readingTime}
+      </span>
+    </div>
+
+    <!-- Title -->
+    <h3 class="text-lg font-bold text-(--text-primary) group-hover:text-(--accent-cyan) transition-colors leading-snug">
+      <a href={blogHref}>{data.title}</a>
+    </h3>
+
+    <!-- Description -->
+    <p class="text-(--text-secondary) text-sm leading-relaxed line-clamp-3">
+      {data.description}
+    </p>
+
+    <!-- Tags -->
+    <div class="flex flex-wrap gap-1.5 pt-1">
+      {
+        data.tags.map((tag: string) => (
+          <span class="px-2 py-0.5 rounded bg-(--bg-primary) border border-(--border-color) text-[0.7rem] font-mono text-(--text-muted)">
+            #{tag}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Read more CTA -->
+  <div class="pt-4 border-t border-(--border-color) flex items-center justify-between text-xs font-mono">
+    <span class="text-(--text-muted)">{data.publishDate}</span>
+    <a
+      href={blogHref}
+      class="inline-flex items-center gap-1.5 text-(--accent-cyan) group-hover:text-(--accent-green) font-semibold transition-colors"
+    >
+      <span>{t("blog.readMore")}</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+      </svg>
+    </a>
+  </div>
+</article>

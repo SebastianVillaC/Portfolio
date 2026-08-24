@@ -1,0 +1,122 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import BlogCard from "../../../components/BlogCard.astro";
+import { getCollection } from "astro:content";
+import { getLang, useTranslations } from "../../../i18n/utils";
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+
+const allPosts = await getCollection("blog", (entry) => entry.data.lang === "en");
+allPosts.sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
+
+const title = "Blog & Writeups | Sebas.DevSec";
+const description = "Technical articles, vulnerability analysis, and security challenge walkthroughs in backend development and cybersecurity.";
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+
+  <main id="main-content" class="px-6 py-12 md:py-20 max-w-7xl mx-auto flex-1">
+    <!-- Breadcrumb / Back -->
+    <div class="mb-8" data-reveal>
+      <a
+        href="/Portfolio/en/"
+        class="inline-flex items-center gap-2 text-xs font-mono text-(--text-secondary) hover:text-(--accent-cyan) transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span>~/home</span>
+      </a>
+    </div>
+
+    <!-- Header -->
+    <header class="mb-12 text-center max-w-2xl mx-auto" data-reveal>
+      <p class="font-mono text-xs text-(--accent-cyan) mb-2 tracking-wide">~/blog/writeups</p>
+      <h1>{t("blog.heading")}</h1>
+      <p class="text-(--text-secondary) text-sm sm:text-base">
+        {t("blog.description")}
+      </p>
+    </header>
+
+    <!-- Search Toolbar -->
+    <div class="mb-10 max-w-2xl mx-auto" data-reveal>
+      <div class="relative">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-(--text-muted)"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input
+          id="blog-search"
+          type="text"
+          placeholder={t("blog.searchPlaceholder")}
+          class="w-full pl-12 pr-4 py-3 rounded-xl bg-(--bg-secondary) border border-(--border-color) focus:border-(--accent-cyan) focus:outline-none text-sm text-(--text-primary) placeholder:text-(--text-muted) transition-colors font-mono"
+        />
+      </div>
+    </div>
+
+    <!-- Blog Posts Grid -->
+    <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        allPosts.map((post, index) => (
+          <div class="blog-item-wrapper" data-title={post.data.title.toLowerCase()} data-tags={post.data.tags.join(" ").toLowerCase()} data-desc={post.data.description.toLowerCase()} data-cat={post.data.category.toLowerCase()}>
+            <BlogCard post={post} delay={index * 100} />
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- No results message -->
+    <div id="no-blog-msg" class="hidden text-center py-16 border border-(--border-color) rounded-xl bg-(--bg-secondary)/40 mt-8">
+      <p class="font-mono text-sm text-(--text-secondary)">{t("blog.noResults")}</p>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  function initBlogFilters() {
+    const searchInput = document.getElementById("blog-search") as HTMLInputElement | null;
+    const items = document.querySelectorAll<HTMLElement>(".blog-item-wrapper");
+    const noMsg = document.getElementById("no-blog-msg");
+
+    searchInput?.addEventListener("input", (e) => {
+      const q = (e.target as HTMLInputElement).value.toLowerCase().trim();
+      let count = 0;
+
+      items.forEach((item) => {
+        const title = item.dataset.title || "";
+        const tags = item.dataset.tags || "";
+        const desc = item.dataset.desc || "";
+        const cat = item.dataset.cat || "";
+
+        if (!q || title.includes(q) || tags.includes(q) || desc.includes(q) || cat.includes(q)) {
+          item.classList.remove("hidden");
+          count++;
+        } else {
+          item.classList.add("hidden");
+        }
+      });
+
+      if (noMsg) {
+        if (count === 0) {
+          noMsg.classList.remove("hidden");
+        } else {
+          noMsg.classList.add("hidden");
+        }
+      }
+    });
+  }
+
+  document.addEventListener("astro:page-load", initBlogFilters);
+</script>

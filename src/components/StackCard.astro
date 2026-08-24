@@ -5,23 +5,23 @@ const { delay = 0 } = Astro.props;
 ---
 
 <section
-  class="border border-(--border-color) rounded-lg p-6 space-y-4
-         hover:border-(--accent-cyan) transition-colors
-         bg-(--bg-secondary)"
+  class="border border-(--border-color) rounded-xl p-6 space-y-4 bg-(--bg-secondary)/80 backdrop-blur-sm card-glow transition-all"
   data-reveal
   style={`transition-delay: ${delay}ms`}
 >
-  <Icon name={data.icon} />
+  <div class="w-12 h-12 rounded-lg bg-(--bg-primary) border border-(--border-color) flex items-center justify-center text-(--accent-cyan)">
+    <Icon name={data.icon} />
+  </div>
 
-  <h3 class="text-lg font-bold text-(--accent-cyan)">
+  <h3 class="text-lg font-bold text-(--text-primary)">
     {data.title}
   </h3>
 
   <ul class="space-y-2 text-sm text-(--text-secondary)">
     {data.skills.map((skill: string) => (
-      <li class="flex items-center gap-2">
+      <li class="flex items-center gap-2.5">
         <span class="w-1.5 h-1.5 rounded-full bg-(--accent-green)"></span>
-        {skill}
+        <span>{skill}</span>
       </li>
     ))}
   </ul>

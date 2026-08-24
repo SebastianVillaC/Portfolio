@@ -3,22 +3,24 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 import Hero from "../../components/Hero.astro";
 import About from "../../components/About.astro";
+import Timeline from "../../components/Timeline.astro";
 import Projects from "../../components/Projects.astro";
 import Certifications from "../../components/Certifications.astro";
 import Contact from "../../components/Contact.astro";
 import Footer from "../../components/Footer.astro";
 import Stack from "../../components/Stack.astro";
 
-const title = "Portfolio - Sebas.DevSec";
+const title = "Sebas.DevSec | Software Developer & Cybersecurity Enthusiast";
 const description =
-  "Sebastián's personal portfolio - Software Developer & Cybersecurity";
+  "Sebastián's personal portfolio - Software Developer & Cybersecurity. Specialized in secure coding, backend architecture, and vulnerability analysis.";
 ---
 
-<BaseLayout title={title} description={description} >
+<BaseLayout title={title} description={description}>
   <Header />
-  <main>
+  <main id="main-content">
     <Hero />
-    <About/>
+    <About />
+    <Timeline />
     <Projects />
     <Stack />
     <Certifications />

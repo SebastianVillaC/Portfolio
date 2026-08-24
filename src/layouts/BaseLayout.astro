@@ -1,11 +1,78 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
-const { title, description } = Astro.props;
+import BackToTop from "../components/BackToTop.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "article";
+}
+
+const {
+  title = "Portfolio - Sebas.DevSec",
+  description = "Portfolio personal de Sebastián - Desarrollador de Software y Ciberseguridad",
+  image = "/Portfolio/og-image.svg",
+  type = "website",
+} = Astro.props;
+
+const currentLocale = Astro.currentLocale ?? "es";
+const siteUrl = "https://sebastianvillac.github.io";
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+const socialImageURL = new URL(image, siteUrl);
+
+// Calculate alternate hreflang URLs
+const base = "/Portfolio";
+const pathname = Astro.url.pathname;
+const relativePath = pathname.startsWith(base) ? pathname.slice(base.length) : pathname;
+const pathWithoutLocale = relativePath.startsWith("/en")
+  ? relativePath.slice(3) || "/"
+  : relativePath || "/";
+
+const cleanPath = pathWithoutLocale === "/" ? "" : pathWithoutLocale;
+const esUrl = new URL(`${base}${cleanPath ? cleanPath : "/"}`, siteUrl);
+const enUrl = new URL(`${base}/en${cleanPath}`, siteUrl);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://sebastianvillac.github.io/Portfolio/#person",
+      "name": "Sebastián Villa",
+      "jobTitle": "Software Developer & Cybersecurity Enthusiast",
+      "url": "https://sebastianvillac.github.io/Portfolio/",
+      "image": socialImageURL.href,
+      "sameAs": [
+        "https://github.com/SebastianVillaC",
+        "https://www.linkedin.com/in/sebastian-villa-c/"
+      ],
+      "knowsAbout": [
+        "Software Development",
+        "Cybersecurity",
+        "Backend Architecture",
+        "Web Security",
+        "DevSecOps",
+        "TypeScript",
+        "Astro",
+        "Python"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://sebastianvillac.github.io/Portfolio/#website",
+      "url": "https://sebastianvillac.github.io/Portfolio/",
+      "name": "Sebas.DevSec",
+      "description": description,
+      "inLanguage": [currentLocale]
+    }
+  ]
+};
 ---
 
 <!doctype html>
-<html lang={Astro.currentLocale ?? "es"}>
+<html lang={currentLocale}>
   <head>
     <script is:inline>
       (function () {
@@ -20,26 +87,74 @@ const { title, description } = Astro.props;
     </script>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/Portfolio/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#0a0a0c" />
+
+    <!-- Canonical & Alternates (SEO & i18n) -->
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="es" href={esUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={esUrl} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Sebastián Villa" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta name="description" content={description} />
-    <title>{title}</title>
+    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:site_name" content="Sebas.DevSec" />
+    <meta property="og:locale" content={currentLocale === "es" ? "es_ES" : "en_US"} />
 
-    <!-- Google Fonts  -->
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
+
+    <!-- Google Fonts (Inter + JetBrains Mono) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
+    <!-- Structured Data (JSON-LD) -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
     <ClientRouter />
   </head>
-  <body>
+  <body class="min-h-screen flex flex-col selection:bg-(--accent-cyan)/20 selection:text-(--accent-cyan)">
+    <!-- Skip to content for accessibility -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-(--accent-cyan) focus:text-(--bg-primary) focus:font-bold focus:rounded-lg focus:outline-none"
+    >
+      {currentLocale === "es" ? "Saltar al contenido principal" : "Skip to main content"}
+    </a>
+
     <slot />
+    <BackToTop />
     <script src="../scripts/reveal.ts"></script>
+    <script>
+      // Maintain theme on Astro page transitions
+      document.addEventListener("astro:after-swap", () => {
+        const stored = localStorage.getItem("theme");
+        if (stored === "light") {
+          document.documentElement.dataset.theme = "light";
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      });
+    </script>
   </body>
 </html>
