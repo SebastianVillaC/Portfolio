@@ -9,14 +9,14 @@ const t = useTranslations(lang);
 <section id="hero" class="border-b border-(--border-color) relative overflow-hidden">
   <!-- Subtle ambient background blur -->
   <div class="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-(--accent-cyan)/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
-  <div class="absolute bottom-10 right-1/4 w-80 h-80 bg-(--accent-green)/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
+  <div class="absolute bottom-10 right-1/4 w-80 h-80 bg-(--accent-cyan-strong)/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
 
   <div class="max-w-7xl mx-auto px-6 py-16 md:py-28">
     <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
       <!-- Contenido texto -->
       <div class="flex-1 space-y-6 w-full" data-reveal>
         <!-- Status Badge -->
-        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-(--accent-green)/10 border border-(--accent-green)/25 text-(--accent-green) text-xs font-mono font-medium shadow-sm">
+        <div class="badge-status font-mono shadow-sm">
           <span class="relative flex h-2.5 w-2.5">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-(--accent-green) opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-(--accent-green)"></span>
@@ -27,7 +27,7 @@ const t = useTranslations(lang);
         <header>
           <h1 class="text-[clamp(2.2rem,1.6rem+3vw,3.75rem)] font-extrabold tracking-tight leading-[1.15]">
             <span class="text-(--text-primary)">Software Developer</span>
-            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-(--accent-cyan) to-(--accent-green)">
+            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-(--accent-cyan) to-(--accent-cyan-strong)">
               &amp; Cybersecurity Enthusiast
             </span>
           </h1>
@@ -40,7 +40,7 @@ const t = useTranslations(lang);
         <nav class="flex flex-col sm:flex-row gap-4 pt-4" aria-label="Acciones principales">
           <a
             href="#projects"
-            class="flex items-center justify-center gap-2 rounded-xl h-12 px-7 bg-(--accent-green) text-(--bg-primary) font-bold text-sm hover:brightness-110 shadow-lg shadow-(--accent-green)/10 transition-all hover:-translate-y-0.5"
+            class="btn btn-primary h-12 px-7 text-sm font-bold shadow-lg shadow-(--accent-cyan)/10 hover:-translate-y-0.5"
           >
             <span>{t("hero.ctaProjects")}</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -49,7 +49,7 @@ const t = useTranslations(lang);
           </a>
           <a
             href="#contact"
-            class="flex items-center justify-center gap-2 rounded-xl h-12 px-7 border border-(--border-color) bg-(--bg-secondary)/50 font-bold text-sm text-(--text-primary) hover:border-(--accent-cyan) hover:text-(--accent-cyan) transition-all hover:-translate-y-0.5"
+            class="btn btn-secondary h-12 px-7 text-sm font-bold hover:-translate-y-0.5"
           >
             <span>{t("hero.ctaContact")}</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

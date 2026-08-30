@@ -84,13 +84,13 @@ const description = data.description;
     </header>
 
     <!-- Markdown Content Body -->
-    <article class="prose prose-invert max-w-none space-y-6 py-8 text-(--text-secondary) leading-relaxed" data-reveal>
+    <article class="prose max-w-none space-y-6 py-8 text-(--text-secondary) leading-relaxed" data-reveal>
       <Content />
     </article>
 
     <!-- Author Box -->
     <div class="p-6 rounded-xl border border-(--border-color) bg-(--bg-secondary)/60 my-10 flex flex-col sm:flex-row items-center gap-5" data-reveal>
-      <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-(--accent-cyan) to-(--accent-green) flex items-center justify-center text-(--bg-primary) font-bold text-xl font-mono shrink-0">
+      <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-(--accent-cyan) to-(--accent-cyan-strong) flex items-center justify-center text-(--on-accent) font-bold text-xl font-mono shrink-0">
         SV
       </div>
       <div class="space-y-1 text-center sm:text-left">
@@ -105,7 +105,7 @@ const description = data.description;
     <div class="pt-8 border-t border-(--border-color) flex items-center justify-between" data-reveal>
       <a
         href="/Portfolio/blog"
-        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-(--border-color) bg-(--bg-secondary) text-xs font-mono text-(--text-primary) hover:border-(--accent-cyan) transition-colors"
+        class="btn btn-secondary px-5 py-2.5 text-xs font-mono"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />

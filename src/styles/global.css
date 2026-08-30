@@ -15,15 +15,24 @@
 
     --text-primary: #f4f4f6;
     --text-secondary: #a1a1aa;
-    --text-muted: #71717a;
+    --text-muted: #8b8b95;
 
-    --accent-cyan: #00d1ff;
-    --accent-cyan-rgb: 0, 209, 255;
-    --accent-green: #00e676;
-    --accent-green-rgb: 0, 230, 118;
+    --accent-cyan: #22d3ee;
+    --accent-cyan-strong: #67e8f9;
+    --accent-cyan-rgb: 34, 211, 238;
+    --accent-green: #34d399;
+    --accent-green-strong: #6ee7b7;
+    --accent-green-rgb: 52, 211, 153;
+
+    /* Foreground for text/icons sitting on a solid accent fill */
+    --on-accent: #0a0a0c;
 
     --border-color: #27272a;
     --border-color-hover: #3f3f46;
+    /* Borders of interactive controls: meets 3:1 against every surface */
+    --border-strong: #70707b;
+
+    --focus-ring: var(--accent-cyan);
   }
 
   /* Light mode */
@@ -34,15 +43,20 @@
 
     --text-primary: #0f172a;
     --text-secondary: #475569;
-    --text-muted: #64748b;
+    --text-muted: #5b6779;
 
-    --accent-cyan: #0284c7;
-    --accent-cyan-rgb: 2, 132, 199;
-    --accent-green: #059669;
-    --accent-green-rgb: 5, 150, 105;
+    --accent-cyan: #0e7490;
+    --accent-cyan-strong: #155e75;
+    --accent-cyan-rgb: 14, 116, 144;
+    --accent-green: #047857;
+    --accent-green-strong: #065f46;
+    --accent-green-rgb: 4, 120, 87;
+
+    --on-accent: #ffffff;
 
     --border-color: #e2e8f0;
     --border-color-hover: #cbd5e1;
+    --border-strong: #748499;
   }
 
   html {
@@ -103,7 +117,7 @@
   article a:hover,
   section a:hover,
   li a:hover {
-    color: var(--accent-green);
+    color: var(--accent-cyan-strong);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -145,6 +159,74 @@
 }
 
 @layer components {
+  /* Shared button system. Layout utilities (w-full, flex-1, h-12, px-7, ...)
+     stay on the element; these classes only own color, border and focus. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid transparent;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  .btn-primary {
+    background-color: var(--accent-cyan);
+    color: var(--on-accent);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--accent-cyan-strong);
+    color: var(--on-accent);
+  }
+
+  .btn-secondary {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-strong);
+    color: var(--text-primary);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan-strong);
+  }
+
+  .btn-soft {
+    background-color: color-mix(in srgb, var(--accent-cyan) 12%, transparent);
+    border-color: color-mix(in srgb, var(--accent-cyan) 30%, transparent);
+    color: var(--accent-cyan-strong);
+  }
+
+  .btn-soft:hover {
+    background-color: var(--accent-cyan);
+    color: var(--on-accent);
+    border-color: var(--accent-cyan);
+  }
+
+  .btn-success {
+    background-color: var(--accent-green);
+    border-color: var(--accent-green);
+    color: var(--on-accent);
+  }
+
+  .btn-success:hover {
+    background-color: var(--accent-green-strong);
+    border-color: var(--accent-green-strong);
+    color: var(--on-accent);
+  }
   .glass-panel {
     background-color: color-mix(in srgb, var(--bg-secondary) 75%, transparent);
     backdrop-filter: blur(16px);
@@ -162,12 +244,6 @@
     transform: translateY(-3px);
   }
 
-  .card-glow-green:hover {
-    border-color: var(--accent-green);
-    box-shadow: 0 0 25px rgba(var(--accent-green-rgb), 0.12);
-    transform: translateY(-3px);
-  }
-
   .badge-devsec {
     font-family: var(--font-mono);
     display: inline-flex;
@@ -179,7 +255,7 @@
     font-weight: 600;
     background-color: color-mix(in srgb, var(--accent-cyan) 10%, transparent);
     border: 1px solid color-mix(in srgb, var(--accent-cyan) 25%, transparent);
-    color: var(--accent-cyan);
+    color: var(--accent-cyan-strong);
   }
 
   .badge-status {
@@ -192,7 +268,7 @@
     font-weight: 500;
     background-color: color-mix(in srgb, var(--accent-green) 12%, transparent);
     border: 1px solid color-mix(in srgb, var(--accent-green) 30%, transparent);
-    color: var(--accent-green);
+    color: var(--accent-green-strong);
   }
 
   [data-reveal] {

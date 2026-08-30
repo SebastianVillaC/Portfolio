@@ -59,7 +59,7 @@ const description = "Complete catalog of secure software engineering, tools, and
           id="project-search"
           type="text"
           placeholder={t("projects.searchPlaceholder")}
-          class="w-full pl-12 pr-4 py-3 rounded-xl bg-(--bg-secondary) border border-(--border-color) focus:border-(--accent-cyan) focus:outline-none text-sm text-(--text-primary) placeholder:text-(--text-muted) transition-colors font-mono"
+          class="w-full pl-12 pr-4 py-3 rounded-xl bg-(--bg-secondary) border border-(--border-strong) focus:border-(--accent-cyan) focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--focus-ring) text-sm text-(--text-primary) placeholder:text-(--text-muted) transition-colors font-mono"
         />
       </div>
 
@@ -68,28 +68,28 @@ const description = "Complete catalog of secure software engineering, tools, and
         <button
           type="button"
           data-category="all"
-          class="filter-btn active px-4 py-1.5 rounded-lg text-xs font-mono font-semibold bg-(--accent-cyan) text-(--bg-primary) transition-all"
+          class="filter-btn active btn btn-primary px-4 py-1.5 rounded-lg text-xs font-mono font-semibold"
         >
           {t("projects.filterAll")}
         </button>
         <button
           type="button"
           data-category="cybersecurity"
-          class="filter-btn px-4 py-1.5 rounded-lg text-xs font-mono font-semibold bg-(--bg-secondary) border border-(--border-color) text-(--text-secondary) hover:text-(--accent-cyan) hover:border-(--accent-cyan) transition-all"
+          class="filter-btn btn btn-secondary px-4 py-1.5 rounded-lg text-xs font-mono font-semibold"
         >
           {t("projects.filterCyber")}
         </button>
         <button
           type="button"
           data-category="backend"
-          class="filter-btn px-4 py-1.5 rounded-lg text-xs font-mono font-semibold bg-(--bg-secondary) border border-(--border-color) text-(--text-secondary) hover:text-(--accent-cyan) hover:border-(--accent-cyan) transition-all"
+          class="filter-btn btn btn-secondary px-4 py-1.5 rounded-lg text-xs font-mono font-semibold"
         >
           {t("projects.filterBackend")}
         </button>
         <button
           type="button"
           data-category="fullstack"
-          class="filter-btn px-4 py-1.5 rounded-lg text-xs font-mono font-semibold bg-(--bg-secondary) border border-(--border-color) text-(--text-secondary) hover:text-(--accent-cyan) hover:border-(--accent-cyan) transition-all"
+          class="filter-btn btn btn-secondary px-4 py-1.5 rounded-lg text-xs font-mono font-semibold"
         >
           {t("projects.filterFullstack")}
         </button>
@@ -158,12 +158,12 @@ const description = "Complete catalog of secure software engineering, tools, and
     filterButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
         filterButtons.forEach((b) => {
-          b.classList.remove("bg-(--accent-cyan)", "text-(--bg-primary)", "active");
-          b.classList.add("bg-(--bg-secondary)", "border", "border-(--border-color)", "text-(--text-secondary)");
+          b.classList.remove("btn-primary", "active");
+          b.classList.add("btn-secondary");
         });
 
-        btn.classList.add("bg-(--accent-cyan)", "text-(--bg-primary)", "active");
-        btn.classList.remove("bg-(--bg-secondary)", "border", "border-(--border-color)", "text-(--text-secondary)");
+        btn.classList.add("btn-primary", "active");
+        btn.classList.remove("btn-secondary");
 
         currentCategory = btn.dataset.category || "all";
         filterItems();

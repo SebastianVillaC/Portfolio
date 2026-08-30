@@ -14,7 +14,7 @@ const links = [
   { href: isHome ? "#projects" : `${homeUrl}#projects`, label: t("nav.projects"), id: "projects" },
   { href: isHome ? "#stack" : `${homeUrl}#stack`, label: t("nav.stack"), id: "stack" },
   { href: isHome ? "#certifications" : `${homeUrl}#certifications`, label: t("nav.certifications"), id: "certifications" },
-  { href: lang === "en" ? "/Portfolio/en/blog" : "/Portfolio/blog", label: t("nav.blog"), id: "blog", isPage: true },
+  { href: isHome ? "#blog" : `${homeUrl}#blog`, label: t("nav.blog"), id: "blog" },
   { href: isHome ? "#contact" : `${homeUrl}#contact`, label: t("nav.contact"), id: "contact" },
 ];
 ---

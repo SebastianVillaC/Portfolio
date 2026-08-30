@@ -17,7 +17,7 @@ const links = [
   { href: isHome ? "#projects" : `${homeUrl}#projects`, label: t("nav.projects") },
   { href: isHome ? "#stack" : `${homeUrl}#stack`, label: t("nav.stack") },
   { href: isHome ? "#certifications" : `${homeUrl}#certifications`, label: t("nav.certifications") },
-  { href: lang === "en" ? "/Portfolio/en/blog" : "/Portfolio/blog", label: t("nav.blog") },
+  { href: isHome ? "#blog" : `${homeUrl}#blog`, label: t("nav.blog") },
   { href: isHome ? "#contact" : `${homeUrl}#contact`, label: t("nav.contact") },
 ];
 ---
@@ -49,7 +49,7 @@ const links = [
           target="_blank"
           rel="noopener noreferrer"
           aria-label={t("cv.labelMobile")}
-          class="flex gap-2 items-center justify-center w-full max-w-xs bg-(--accent-green) text-(--bg-primary) rounded-lg px-4 py-2.5 text-sm font-semibold hover:brightness-110 transition-[filter]"
+          class="btn btn-primary w-full max-w-xs rounded-lg px-4 py-2.5 text-sm font-semibold"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

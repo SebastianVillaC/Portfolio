@@ -19,7 +19,7 @@ const blogHref = lang === "en" ? `/Portfolio/en/blog/${slug}` : `/Portfolio/blog
   <div class="space-y-3">
     <!-- Meta row -->
     <div class="flex items-center justify-between gap-2 text-xs font-mono">
-      <span class="text-(--accent-cyan) bg-(--accent-cyan)/10 px-2.5 py-0.5 rounded-md border border-(--accent-cyan)/20 font-medium">
+      <span class="text-(--accent-cyan-strong) bg-(--accent-cyan)/10 px-2.5 py-0.5 rounded-md border border-(--accent-cyan)/30 font-medium">
         {data.category}
       </span>
       <span class="text-(--text-muted)">
@@ -54,7 +54,7 @@ const blogHref = lang === "en" ? `/Portfolio/en/blog/${slug}` : `/Portfolio/blog
     <span class="text-(--text-muted)">{data.publishDate}</span>
     <a
       href={blogHref}
-      class="inline-flex items-center gap-1.5 text-(--accent-cyan) group-hover:text-(--accent-green) font-semibold transition-colors"
+      class="inline-flex items-center gap-1.5 text-(--accent-cyan) group-hover:text-(--accent-cyan-strong) font-semibold transition-colors"
     >
       <span>{t("blog.readMore")}</span>
       <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">

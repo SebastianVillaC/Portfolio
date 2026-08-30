@@ -21,7 +21,7 @@ entries.sort((a, b) => a.data.order - b.data.order);
 
     <div class="max-w-3xl mx-auto relative">
       <!-- Vertical connecting line -->
-      <div class="absolute left-4 md:left-1/2 top-4 bottom-4 w-0.5 bg-gradient-to-b from-(--accent-cyan) via-(--accent-green) to-(--border-color) -translate-x-1/2"></div>
+      <div class="absolute left-4 md:left-1/2 top-4 bottom-4 w-0.5 bg-gradient-to-b from-(--accent-cyan) via-(--accent-cyan)/40 to-(--border-color) -translate-x-1/2"></div>
 
       <div class="space-y-10">
         {
@@ -37,14 +37,14 @@ entries.sort((a, b) => a.data.order - b.data.order);
               >
                 <!-- Central Node / Dot -->
                 <div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-(--bg-primary) border-2 border-(--accent-cyan) flex items-center justify-center shadow-md shadow-(--accent-cyan)/20 z-10">
-                  <div class="w-2.5 h-2.5 rounded-full bg-(--accent-green)"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-(--accent-cyan)"></div>
                 </div>
 
                 <!-- Content Card -->
                 <div class={`w-full md:w-[calc(50%-2.5rem)] pl-12 md:pl-0 ${isEven ? "md:text-right" : ""}`}>
                   <article class="p-6 rounded-xl border border-(--border-color) bg-(--bg-secondary)/80 backdrop-blur-sm card-glow transition-all">
                     <div class={`flex flex-wrap items-center gap-2 mb-2 ${isEven ? "md:justify-end" : "justify-start"}`}>
-                      <span class="font-mono text-xs font-semibold text-(--accent-cyan) bg-(--accent-cyan)/10 px-2.5 py-0.5 rounded-md border border-(--accent-cyan)/20">
+                      <span class="font-mono text-xs font-semibold text-(--accent-cyan-strong) bg-(--accent-cyan)/10 px-2.5 py-0.5 rounded-md border border-(--accent-cyan)/30">
                         {item.data.year}
                       </span>
                       {item.data.badge && (
@@ -57,7 +57,7 @@ entries.sort((a, b) => a.data.order - b.data.order);
                     <h3 class="text-lg font-bold text-(--text-primary) mb-1">
                       {item.data.title}
                     </h3>
-                    <p class="text-xs font-medium text-(--accent-green) font-mono mb-3">
+                    <p class="text-xs font-medium text-(--text-muted) font-mono mb-3">
                       {item.data.organization}
                     </p>
                     <p class="text-sm text-(--text-secondary) leading-relaxed">

@@ -105,6 +105,8 @@ export const ui = {
     // Blog / Writeups
     "blog.heading": "Blog & Writeups",
     "blog.description": "Artículos técnicos, análisis de vulnerabilidades y notas de aprendizaje.",
+    "blog.homeDescription": "Writeups de retos, análisis de vulnerabilidades y notas sobre desarrollo seguro.",
+    "blog.viewAll": "Ver todos los artículos",
     "blog.searchPlaceholder": "Buscar writeups y artículos...",
     "blog.readMore": "Leer artículo",
     "blog.minRead": "min de lectura",
@@ -219,6 +221,8 @@ export const ui = {
     // Blog / Writeups
     "blog.heading": "Blog & Writeups",
     "blog.description": "Technical articles, vulnerability analysis, and security challenge walkthroughs.",
+    "blog.homeDescription": "Challenge writeups, vulnerability analysis, and notes on secure development.",
+    "blog.viewAll": "View all articles",
     "blog.searchPlaceholder": "Search writeups and articles...",
     "blog.readMore": "Read article",
     "blog.minRead": "min read",
